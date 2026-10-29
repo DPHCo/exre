@@ -1,0 +1,77 @@
+@if (resource(); as r) {
+  <div class="page">
+    <div class="hero" [style.background]="r.coverColor">
+      <div class="top-row">
+        <button type="button" class="circle-btn" (click)="goBack()" aria-label="Volver">
+          <app-icon name="arrow-left" [size]="18" color="#fff"></app-icon>
+        </button>
+        <button
+          type="button"
+          class="circle-btn"
+          (click)="toggleFavorite()"
+          [attr.aria-label]="state.isFavorite(r.id) ? 'Quitar favorito' : 'Marcar favorito'"
+        >
+          <app-icon
+            name="heart"
+            [size]="18"
+            [color]="state.isFavorite(r.id) ? 'var(--color-favorite)' : '#fff'"
+          ></app-icon>
+        </button>
+      </div>
+      <div class="type-wrap">
+        <app-icon [name]="typeIcon(r.type)" [size]="26" color="#fff"></app-icon>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="title-col">
+        <p class="category">{{ r.category | uppercase }}</p>
+        <h1>{{ r.title }}</h1>
+        <div class="author-row">
+          <app-icon name="user-round" [size]="13" color="var(--color-on-bg-subtle)"></app-icon>
+          <span>{{ r.author }}</span>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-chip">
+          <app-icon name="timer" [size]="14" color="var(--color-text-secondary)"></app-icon>
+          <span>{{ r.durationMinutes }} min</span>
+        </div>
+        <div class="meta-chip">
+          <app-icon name="signal-high" [size]="14" color="var(--color-text-secondary)"></app-icon>
+          <span>{{ levelLabel(r.level) }}</span>
+        </div>
+        <div class="meta-chip">
+          <app-icon [name]="typeIcon(r.type)" [size]="14" color="var(--color-text-secondary)"></app-icon>
+          <span>{{ typeLabel(r.type) }}</span>
+        </div>
+      </div>
+
+      <div class="desc-col">
+        <p class="section-label">Descripcion</p>
+        <p class="desc">{{ r.description }}</p>
+      </div>
+
+      <a class="resource-link" [href]="r.contentUrl" target="_blank" rel="noopener noreferrer">
+        <app-icon name="link" [size]="16" color="var(--color-primary-light)"></app-icon>
+        <span>{{ linkLabel(r.contentUrl) }}</span>
+      </a>
+
+      <button type="button" class="btn secondary" (click)="share()">
+        <app-icon name="share-2" [size]="18" color="#fff"></app-icon>
+        Compartir
+      </button>
+
+      <button type="button" class="btn primary" (click)="toggleCompleted()">
+        <app-icon name="check" [size]="18" [color]="state.isCompleted(r.id) ? '#fff' : 'var(--color-primary)'"></app-icon>
+        {{ state.isCompleted(r.id) ? 'Marcar como pendiente' : 'Marcar como completado' }}
+      </button>
+    </div>
+  </div>
+} @else {
+  <div class="page missing">
+    <p>Recurso no encontrado.</p>
+    <button type="button" class="btn primary" (click)="goBack()">Volver</button>
+  </div>
+}

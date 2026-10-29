@@ -1,0 +1,11 @@
+<div class="page">
+  <header>
+    <h1>Galeria</h1>
+  </header>
+
+  <div class="grid">
+    @for (resource of state.resources(); track resource.id) {
+      <app-resource-grid-card [resource]="resource" (open)="openDetail($event)"></app-resource-grid-card>
+    }
+  </div>
+</div>

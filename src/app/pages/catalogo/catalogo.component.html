@@ -1,0 +1,45 @@
+<div class="page">
+  <header>
+    <h1>Catalogo</h1>
+  </header>
+
+  <label class="search">
+    <app-icon name="search" [size]="18" color="var(--color-text-tertiary)"></app-icon>
+    <input
+      type="search"
+      placeholder="Buscar por titulo, categoria o autor"
+      [ngModel]="state.searchText()"
+      (ngModelChange)="onSearch($event)"
+    />
+  </label>
+
+  <div class="chips" role="listbox" aria-label="Filtro por categoria">
+    @for (cat of categories; track cat) {
+      <button
+        type="button"
+        class="chip"
+        [class.active]="state.selectedCategory() === cat"
+        (click)="selectCategory(cat)"
+      >
+        {{ cat }}
+      </button>
+    }
+  </div>
+
+  <p class="results">RESULTADOS ({{ state.filteredResources().length }})</p>
+
+  <div class="list">
+    @for (resource of state.filteredResources(); track resource.id; let i = $index) {
+      @if (i > 0) {
+        <div class="separator" aria-hidden="true"></div>
+      }
+      <app-resource-list-card
+        [resource]="resource"
+        (open)="openDetail($event)"
+        (toggleFavorite)="toggleFavorite($event)"
+      ></app-resource-list-card>
+    } @empty {
+      <p class="empty">No hay recursos que coincidan con la busqueda.</p>
+    }
+  </div>
+</div>

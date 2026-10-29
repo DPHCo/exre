@@ -1,0 +1,8 @@
+<div class="app-shell">
+  <main class="content" [class.with-tabs]="showTabBar()">
+    <router-outlet></router-outlet>
+  </main>
+  @if (showTabBar()) {
+    <app-tab-bar></app-tab-bar>
+  }
+</div>

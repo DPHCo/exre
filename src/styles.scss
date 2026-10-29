@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
+
+:root {
+  --color-primary: #4f46e5;
+  --color-primary-soft: #3a32a0;
+  --color-primary-light: #a5b4fc;
+  --color-bg: #231c6b;
+  --color-surface: #2e2789;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #c5bfee;
+  --color-text-tertiary: #948ccb;
+  --color-border: #443ba5;
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-favorite: #f43f5e;
+  --color-on-bg: #ffffff;
+  --color-on-bg-muted: #ffffffb3;
+  --color-on-bg-subtle: #ffffff80;
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background: #1a1550;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+button,
+input,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}

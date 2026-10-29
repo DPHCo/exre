@@ -1,0 +1,86 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.cover {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.category {
+  font-weight: 500;
+}
+
+.dot,
+.author {
+  color: var(--color-text-secondary);
+}
+
+.dot {
+  color: var(--color-text-tertiary);
+}
+
+.sub {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+}
+
+.duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fav-btn {
+  border: none;
+  background: transparent;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav-btn.on app-icon {
+  filter: drop-shadow(0 0 2px rgba(244, 63, 94, 0.4));
+}

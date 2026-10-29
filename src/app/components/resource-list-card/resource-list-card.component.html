@@ -1,0 +1,33 @@
+<article class="card" (click)="open.emit(resource.id)" role="button" tabindex="0">
+  <div class="cover" [style.background]="resource.coverColor">
+    <app-icon [name]="typeIcon(resource.type)" [size]="24" color="#fff"></app-icon>
+  </div>
+  <div class="content">
+    <h3 class="title">{{ resource.title }}</h3>
+    <div class="meta">
+      <span class="category" [style.color]="categoryLight(resource.category)">{{ resource.category }}</span>
+      <span class="dot">·</span>
+      <span class="author">{{ resource.author }}</span>
+    </div>
+    <div class="sub">
+      <span class="duration">
+        <app-icon name="timer" [size]="12" color="var(--color-text-tertiary)"></app-icon>
+        {{ resource.durationMinutes }} min
+      </span>
+      <span class="level">{{ levelLabel(resource.level) }}</span>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="fav-btn"
+    [class.on]="state.isFavorite(resource.id)"
+    (click)="onFavoriteClick($event)"
+    [attr.aria-label]="state.isFavorite(resource.id) ? 'Quitar de favoritos' : 'Marcar favorito'"
+  >
+    <app-icon
+      name="heart"
+      [size]="20"
+      [color]="state.isFavorite(resource.id) ? 'var(--color-favorite)' : 'var(--color-text-tertiary)'"
+    ></app-icon>
+  </button>
+</article>

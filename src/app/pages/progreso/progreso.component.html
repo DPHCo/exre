@@ -1,0 +1,88 @@
+<div class="page">
+  <header>
+    <h1>Progreso</h1>
+  </header>
+
+  <section class="summary-card">
+    <div class="percent-row">
+      <p class="percent">{{ state.progressPercent() }}%</p>
+      <div class="count-badge">
+        <span>{{ state.completedCount() }} completados</span>
+        <span class="sep">·</span>
+        <span>{{ state.pendingCount() }} pendientes</span>
+      </div>
+    </div>
+    <div class="bar">
+      <div class="fill" [style.width.%]="state.progressPercent()"></div>
+    </div>
+  </section>
+
+  <section class="lifecycle">
+    <div class="dot-wrap">
+      <app-icon name="activity" [size]="18" color="var(--color-primary-light)"></app-icon>
+    </div>
+    <div>
+      <p class="label">Ultimo evento de ciclo de vida</p>
+      <p class="value">{{ state.lastLifecycleLabel() }}</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Resumen por categoria</h2>
+    <div class="cat-list">
+      @for (row of state.progressByCategory(); track row.category) {
+        <article class="cat-row">
+          <div class="cat-top">
+            <div class="name-row">
+              <span class="dot" [style.background]="categoryColor(row.category)"></span>
+              <span>{{ row.category }}</span>
+            </div>
+            <span>{{ row.completed }}/{{ row.total }}</span>
+          </div>
+          <div class="bar thin">
+            <div
+              class="fill"
+              [style.width.%]="row.percent"
+              [style.background]="categoryColor(row.category)"
+            ></div>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2>Recursos completados</h2>
+    @if (state.completedResources().length === 0) {
+      <p class="empty">Todavia no has completado ningun recurso.</p>
+    } @else {
+      <ul class="done-list">
+        @for (r of state.completedResources(); track r.id) {
+          <li (click)="openDetail(r.id)">
+            <span class="check">
+              <app-icon name="check" [size]="14" color="#fff"></app-icon>
+            </span>
+            <div>
+              <strong>{{ r.title }}</strong>
+              <small>{{ r.category }} · Completado</small>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+
+  @if (state.lifecycleHistory().length) {
+    <section>
+      <h2>Historial de ciclo de vida</h2>
+      <ul class="events">
+        @for (ev of state.lifecycleHistory(); track ev.timestamp + ev.name) {
+          <li>
+            <strong>{{ ev.name }}</strong>
+            <span>{{ ev.timestamp }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

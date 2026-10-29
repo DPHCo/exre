@@ -1,0 +1,26 @@
+.app-shell {
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  &.with-tabs {
+    padding-bottom: 4px;
+  }
+}
+
+app-tab-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+}

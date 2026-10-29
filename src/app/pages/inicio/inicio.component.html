@@ -1,0 +1,72 @@
+<div class="page">
+  <header class="header">
+    <p class="eyebrow">BIENVENIDO A</p>
+    <h1 class="title">ExRE</h1>
+    <p class="subtitle">
+      Explorador de recursos de estudio. Consulta, filtra, marca favoritos y sigue tu progreso.
+    </p>
+  </header>
+
+  <section class="lifecycle-card" [class.inactive]="!state.isActive()">
+    <div class="dot-wrap">
+      <app-icon name="activity" [size]="18" color="var(--color-primary-light)"></app-icon>
+    </div>
+    <div class="text-col">
+      <p class="label">Estado del ciclo de vida</p>
+      <p class="state">{{ state.lastLifecycleLabel() }}</p>
+      <p class="hint">
+        @if (state.isActive()) {
+          isActive: true — la app está en primer plano
+        } @else {
+          isActive: false — la app está en segundo plano
+        }
+      </p>
+    </div>
+  </section>
+
+  <section class="stats">
+    <article class="stat">
+      <p class="value">{{ state.resourceCount() }}</p>
+      <p class="label">Disponibles</p>
+    </article>
+    <article class="stat">
+      <p class="value">{{ state.favoriteCount() }}</p>
+      <p class="label">Favoritos</p>
+    </article>
+    <article class="stat">
+      <p class="value">{{ state.completedCount() }}</p>
+      <p class="label">Completados</p>
+    </article>
+  </section>
+
+  <section class="quick">
+    <h2 class="section-title">Accesos rapidos</h2>
+    <div class="quick-grid">
+      @for (link of quickLinks; track link.path) {
+        <a class="quick-card" [class]="link.tone" [routerLink]="link.path">
+          <div class="top">
+            <span class="icon-wrap">
+              <app-icon [name]="link.icon" [size]="20" color="#fff"></app-icon>
+            </span>
+            <app-icon name="arrow-up-right" [size]="18" color="#FFFFFFCC"></app-icon>
+          </div>
+          <span class="qlabel">{{ link.label }}</span>
+        </a>
+      }
+    </div>
+  </section>
+
+  @if (state.lifecycleHistory().length) {
+    <section class="history">
+      <h2 class="section-title">Últimos eventos</h2>
+      <ul>
+        @for (ev of state.lifecycleHistory().slice(0, 4); track ev.timestamp + ev.name) {
+          <li>
+            <strong>{{ ev.name }}</strong>
+            <span>{{ ev.timestamp }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

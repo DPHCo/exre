@@ -1,0 +1,26 @@
+<div class="page">
+  <header>
+    <h1>Favoritos</h1>
+    <p>{{ state.favoriteCount() }} recursos marcados</p>
+  </header>
+
+  @if (state.favoriteResources().length === 0) {
+    <div class="empty">
+      <p>Aún no tienes favoritos.</p>
+      <p class="hint">Marca un corazón en Catálogo o Detalle para verlos aquí.</p>
+    </div>
+  } @else {
+    <div class="list">
+      @for (resource of state.favoriteResources(); track resource.id; let i = $index) {
+        @if (i > 0) {
+          <div class="separator" aria-hidden="true"></div>
+        }
+        <app-resource-list-card
+          [resource]="resource"
+          (open)="openDetail($event)"
+          (toggleFavorite)="toggleFavorite($event)"
+        ></app-resource-list-card>
+      }
+    </div>
+  }
+</div>

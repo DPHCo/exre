@@ -1,0 +1,19 @@
+<article class="card" (click)="open.emit(resource.id)" role="button" tabindex="0">
+  <div class="cover" [style.background]="resource.coverColor">
+    <app-icon [name]="typeIcon(resource.type)" [size]="28" color="#fff"></app-icon>
+    @if (state.isCompleted(resource.id)) {
+      <span class="badge completed">
+        <app-icon name="check" [size]="14" color="#fff"></app-icon>
+      </span>
+    }
+    @if (state.isFavorite(resource.id)) {
+      <span class="badge favorite">
+        <app-icon name="heart" [size]="14" color="#fff"></app-icon>
+      </span>
+    }
+  </div>
+  <div class="body">
+    <h3 class="title">{{ resource.title }}</h3>
+    <p class="meta">{{ resource.category }} · {{ levelLabel(resource.level) }}</p>
+  </div>
+</article>
